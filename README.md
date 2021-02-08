@@ -16,7 +16,7 @@
   :hello.handler/todo {}};:hello.handler.todoコンポーネントの初期化時にからのマップを渡すことを示す
 ```
 
-# ハンドラの実装
+## ハンドラの実装
 
 integrantでマルチメソッドとして定義されている，ig/init-keyを実装することによりコンポーネントを作成
 
@@ -28,7 +28,7 @@ integrantでマルチメソッドとして定義されている，ig/init-keyを
     [::response/ok {:todo "data"}]))
 ```
 
-# パラメータの取得
+## パラメータの取得
 
 HTTPリクエスト情報はマップで渡される
 
