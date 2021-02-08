@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  clojure-practice:
+    build: .
+    tty: true
+    restart: always
+    working_dir: "/workspace"
+    volumes:
+      - "./src:/workspace/src"
+    ports:
+      - 80:3000
+  db:
+    build: ./postgres/
+    restart: always
+    volumes:
+      - "./postgres/pgdata:/var/lib/postgresql/data/pgdata"
+      - "./postgres/initdb:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_PASSWORD: XXXX
+      POSTGRES_USER: TORA
+      POSTGRES_DB: example
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
