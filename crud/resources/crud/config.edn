@@ -1,0 +1,35 @@
+{:duct.profile/base
+ {:duct.core/project-ns crud
+
+  :duct.router/ataraxy
+  {:routes
+   {[:get "/example"] [:crud.handler/example]
+    [:get "/todos"] [:crud.handler.todos/list]}};ルーティング
+
+  :crud.handler/example ;依存関係
+  {:db #ig/ref :duct.database/sql}
+  :crud.handler.todos/list
+  {:db #ig/ref :duct.database/sql}
+
+  :duct.migrator/ragtime ;マイグレーション設定
+  {:database #ig/ref :duct.database/sql
+   :strategy :rebase
+   :migrations [#ig/ref :crud.migration/create-crud-table]}
+
+  [:duct.migrator.ragtime/sql :crud.migration/create-crud-table]
+  {:up ["CREATE TABLE todos (id SERIAL PRIMARY KEY, title TEXT);"
+        "INSERT INTO todos (title) values('test1');"
+        "INSERT INTO todos (title) values('test2');"]
+   :down ["DROP TABLE todos;"]}}
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod  {}
+
+ :duct.module/logging {}
+ :duct.module/sql
+ {:database-url "jdbc:postgresql://db/database?user=TORA&password=password1234"};データベース設定
+
+
+ :duct.module.web/api
+ {}}

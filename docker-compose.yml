@@ -5,21 +5,22 @@ services:
     build: .
     tty: true
     restart: always
-    working_dir: "/workspace"
-    volumes:
-      - "./src:/workspace/src"
+    working_dir: "/workdir"
+    volumes: 
+      - ".:/workdir"
     ports:
       - 80:3000
   db:
-    build: ./postgres/
+    image: postgres:9.6
+    tty: true
     restart: always
     volumes:
       - "./postgres/pgdata:/var/lib/postgresql/data/pgdata"
       - "./postgres/initdb:/docker-entrypoint-initdb.d"
     environment:
-      POSTGRES_PASSWORD: XXXX
-      POSTGRES_USER: TORA
-      POSTGRES_DB: example
-      PGDATA: /var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=password1234
+      - POSTGRES_USER=TORA
+      - POSTGRES_DB=database
+      - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - 5432:5432
