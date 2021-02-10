@@ -4,11 +4,17 @@
   :duct.router/ataraxy
   {:routes
    {[:get "/example"] [:crud.handler/example]
-    [:get "/todos"] [:crud.handler.todos/list]}};ルーティング
+    [:get "/todos"] [:crud.handler.todos/list]
+    [:post "/todos" {body :body-params}] [:crud.handler.todos/create body]
+    [:delete "/todos" id] [:crud.handler.todos/delete ^int id]}};ルーティング
 
   :crud.handler/example ;依存関係
   {:db #ig/ref :duct.database/sql}
   :crud.handler.todos/list
+  {:db #ig/ref :duct.database/sql}
+  :crud.handler.todos/create
+  {:db #ig/ref :duct.database/sql}
+  :crud.handler.todos/delete
   {:db #ig/ref :duct.database/sql}
 
   :duct.migrator/ragtime ;マイグレーション設定
