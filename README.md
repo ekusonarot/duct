@@ -47,10 +47,10 @@
 
 integrantでマルチメソッドとして定義されている，ig/init-keyを実装することによりコンポーネントを作成
 
-*hello/src/hello/handler/todo.clj
+*crud/src/crud/handler/todo.clj
 
 ```
-(defmethod ig/init-key :hello.handler/todo [_ options]
+(defmethod ig/init-key :crud.handler/todo [_ options]
   (fn [{[_] :ataraxy/result}]
     [::response/ok {:todo "data"}]))
 ```
@@ -60,7 +60,7 @@ integrantでマルチメソッドとして定義されている，ig/init-keyを
 HTTPリクエスト情報はマップで渡される
 
 ```
-(defmethod ig/init-key :hello.handler/example [_ option]
+(defmethod ig/init-key :crud.handler/example [_ option]
   (fn [{[_ params] :ataraxy/result}]
     ;処理
     )
