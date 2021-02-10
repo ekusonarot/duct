@@ -65,3 +65,18 @@ HTTPリクエスト情報はマップで渡される
     ;処理
     )
 ```
+
+## データアクセス層
+
+データベースの操作はcrud/coundary/todos.cljに記述する
+
+プロトコルとは，インターフェースのようなもの
+
+```
+(defprotocol Todos
+  (get-todos [db])
+  (create-todo [db params])
+  (delete-todo [db id]))
+```
+
+
